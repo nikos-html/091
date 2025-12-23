@@ -145,6 +145,22 @@ DISCORD COMMANDS:
   > Check how many days of access left
 
 ========================================
+DOSTĘPNE SZABLONY (11):
+========================================
+
+1. StockX - Order tracking
+2. Apple - Apple Store professional
+3. Balenciaga - Elegancki luxury
+4. Bape - Streetwear
+5. Dior - Luxury
+6. Louis Vuitton (LV) - Premium
+7. Moncler - Outerwear
+8. Nike - Sportowy
+9. Stussy - Streetwear
+10. Supreme - Streetwear
+11. Trapstar - Urban
+
+========================================
 EVERYTHING WORKING?
 ========================================
 
