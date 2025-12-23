@@ -145,7 +145,7 @@ DISCORD COMMANDS:
   > Check how many days of access left
 
 ========================================
-DOSTĘPNE SZABLONY (11):
+DOSTĘPNE SZABLONY (15):
 ========================================
 
 1. StockX - Order tracking
@@ -159,6 +159,10 @@ DOSTĘPNE SZABLONY (11):
 9. Stussy - Streetwear
 10. Supreme - Streetwear
 11. Trapstar - Urban
+12. Grail Point - Polski sklep sneakerów
+13. Notino - Perfumy i kosmetyki
+14. Media Expert - Elektronika
+15. Zalando - Moda online
 
 ========================================
 EVERYTHING WORKING?
