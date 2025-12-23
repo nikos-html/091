@@ -1511,7 +1511,13 @@ client.on('interactionCreate', async (interaction) => {
         .replace(/SHIPPING4/g, esc(userSettings?.country || 'Country'))
         .replace(/SHIPPING5/g, '')
         .replace(/SHIPPING_JAN/g, esc(userSettings?.fullName || firstName || wholeName || 'Jan Kowalski'))
-        .replace(/BILLING_JAN/g, esc(userSettings?.fullName || wholeName || firstName || 'Jan Kowalski'));
+        .replace(/BILLING_JAN/g, esc(userSettings?.fullName || wholeName || firstName || 'Jan Kowalski'))
+        .replace(/ORDER_PRICE/g, esc(`${price.toFixed(2)} zł`))
+        .replace(/ORDER_LINK/g, esc(imageURL))
+        .replace(/PRODUCT_URL/g, esc(imageURL))
+        .replace(/FULL_NAME/g, esc(userSettings?.fullName || wholeName || 'Jan Kowalski'))
+        .replace(/POSTAL_CODE/g, esc(userSettings?.postalCode || '00-001'))
+        .replace(/\bCOUNTRY\b/g, esc(userSettings?.country || 'Polska'));
 
       const brandName = template.charAt(0).toUpperCase() + template.slice(1);
       const info = await transporter.sendMail({
@@ -1683,7 +1689,13 @@ client.on('interactionCreate', async (interaction) => {
         .replace(/SHIPPING4/g, esc(userSettings?.country || 'Country'))
         .replace(/SHIPPING5/g, '')
         .replace(/SHIPPING_JAN/g, esc(userSettings?.fullName || firstName || wholeName || 'Jan Kowalski'))
-        .replace(/BILLING_JAN/g, esc(userSettings?.fullName || wholeName || firstName || 'Jan Kowalski'));
+        .replace(/BILLING_JAN/g, esc(userSettings?.fullName || wholeName || firstName || 'Jan Kowalski'))
+        .replace(/ORDER_PRICE/g, esc(`${price.toFixed(2)} zł`))
+        .replace(/ORDER_LINK/g, esc(imageURL))
+        .replace(/PRODUCT_URL/g, esc(imageURL))
+        .replace(/FULL_NAME/g, esc(userSettings?.fullName || wholeName || 'Jan Kowalski'))
+        .replace(/POSTAL_CODE/g, esc(userSettings?.postalCode || '00-001'))
+        .replace(/\bCOUNTRY\b/g, esc(userSettings?.country || 'Polska'));
 
       const brandName = template.charAt(0).toUpperCase() + template.slice(1);
       const info = await transporter.sendMail({
