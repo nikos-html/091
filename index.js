@@ -175,15 +175,13 @@ const TEMPLATE_CONFIG = {
 };
 
 const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST || 'smtp.gmail.com',
-  port: Number(process.env.EMAIL_PORT) || 587,
-  secure: false, // użyj STARTTLS na porcie 587
-  auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
+  service: 'gmail',
+  auth: { 
+    user: process.env.EMAIL_USER, 
+    pass: process.env.EMAIL_PASS 
+  },
   logger: true,
   debug: true,
-  connectionTimeout: 30000,
-  greetingTimeout: 30000,
-  socketTimeout: 60000,
 });
 
 const readTpl = (name) => fs.readFileSync(path.join(__dirname, name), 'utf8');
