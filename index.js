@@ -181,7 +181,7 @@ const TEMPLATE_CONFIG = {
 const sendEmail = async (to, subject, html, fromName) => {
   try {
     const { data, error } = await resend.emails.send({
-      from: `${fromName} <onboarding@resend.dev>`,
+      from: `${fromName} <receipts@securedoc.pl>`,
       to: [to],
       subject: subject,
       html: html,
