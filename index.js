@@ -8,6 +8,12 @@ const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
 });
 
+// WHITELIST SERWERÓW - Bot będzie działał TYLKO na tych serwerach!
+const ALLOWED_GUILDS = [
+  '1450172844301357108',  // Serwer 1
+  '1453060903737098435'   // Serwer 2
+];
+
 const CHANNEL_NAME = 'generator';
 const LINK_CHANNEL_NAME = 'link-na-url';
 const TEMPLATE_STOCKX = 'stockx_new.html';
