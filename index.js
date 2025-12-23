@@ -123,6 +123,15 @@ const TEMPLATE_CONFIG = {
     needsReference: false,
     needsFirstName: false,
     needsWholeName: false
+  },
+  supreme: {
+    file: 'supreme.html',
+    needsStyleId: true,
+    needsColour: false,
+    needsTaxes: true,
+    needsReference: false,
+    needsFirstName: false,
+    needsWholeName: false
   }
 };
 
