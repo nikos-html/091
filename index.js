@@ -181,6 +181,9 @@ const transporter = nodemailer.createTransport({
   auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
   logger: true,
   debug: true,
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 30000,
 });
 
 const readTpl = (name) => fs.readFileSync(path.join(__dirname, name), 'utf8');
