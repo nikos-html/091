@@ -1022,7 +1022,27 @@ client.on('interactionCreate', async (interaction) => {
             .setLabel('Supreme')
             .setDescription('Streetwear szablon Supreme')
             .setValue('supreme')
-            .setEmoji('🔴')
+            .setEmoji('🔴'),
+          new StringSelectMenuOptionBuilder()
+            .setLabel('Grail Point')
+            .setDescription('Polski sklep sneakerów Grail Point')
+            .setValue('grailpoint')
+            .setEmoji('🏆'),
+          new StringSelectMenuOptionBuilder()
+            .setLabel('Notino')
+            .setDescription('Perfumy i kosmetyki Notino')
+            .setValue('notino')
+            .setEmoji('💄'),
+          new StringSelectMenuOptionBuilder()
+            .setLabel('Media Expert')
+            .setDescription('Elektronika Media Expert')
+            .setValue('mediaexpert')
+            .setEmoji('📱'),
+          new StringSelectMenuOptionBuilder()
+            .setLabel('Zalando')
+            .setDescription('Moda online Zalando')
+            .setValue('zalando')
+            .setEmoji('👕')
         );
 
       const row = new ActionRowBuilder().addComponents(selectMenu);
