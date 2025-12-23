@@ -375,14 +375,22 @@ async function registerSlashCommands() {
   const rest = new REST().setToken(process.env.DISCORD_TOKEN);
   
   try {
-    console.log('🔄 Rejestrowanie slash commands na serwerze...');
+    console.log('🔄 Rejestrowanie slash commands na wszystkich dozwolonych serwerach...');
     
-    const data = await rest.put(
-      Routes.applicationGuildCommands(client.user.id, process.env.GUILD_ID),
-      { body: commands }
-    );
+    // Rejestruj commands na WSZYSTKICH dozwolonych serwerach
+    for (const guildId of ALLOWED_GUILDS) {
+      try {
+        const data = await rest.put(
+          Routes.applicationGuildCommands(client.user.id, guildId),
+          { body: commands }
+        );
+        console.log(`✅ Zarejestrowano ${data.length} slash commands na serwerze ${guildId}`);
+      } catch (error) {
+        console.error(`❌ Błąd rejestracji na serwerze ${guildId}:`, error.message);
+      }
+    }
 
-    console.log(`✅ Zarejestrowano ${data.length} slash commands na serwerze (widoczne natychmiast)!`);
+    console.log('✅ Zakończono rejestrację slash commands na wszystkich serwerach!');
   } catch (error) {
     console.error('❌ Błąd rejestracji slash commands:', error);
   }
