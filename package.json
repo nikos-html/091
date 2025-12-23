@@ -1,7 +1,7 @@
 {
-  "name": "discord-stockx-bot",
-  "version": "1.0.0",
-  "description": "Discord bot for StockX form generation",
+  "name": "discord-receipts-bot",
+  "version": "1.0.1",
+  "description": "Discord bot for receipt generation",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -9,7 +9,7 @@
   "keywords": [
     "discord",
     "bot",
-    "stockx"
+    "receipts"
   ],
   "author": "",
   "license": "MIT",
