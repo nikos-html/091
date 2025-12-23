@@ -497,7 +497,7 @@ client.once('ready', async () => {
 
     try {
       const sentMessage = await channel.send({
-        content: '**📦 Generator Zamówień - Multi-Brand**\n\n✨ **Dostępne szablony:** StockX, Apple, Balenciaga, Bape, Dior, LV, Moncler, Nike, Stussy, Supreme, Trapstar\n\nKliknij przycisk poniżej, aby wypełnić formularz zamówienia.\nUżyj przycisku "Ustawienia" aby zapisać swoje dane (imię, adres, email) - nie będziesz musiał wpisywać ich za każdym razem!',
+        content: '**📦 Generator Zamówień - Multi-Brand**\n\n✨ **Dostępne szablony (15):** StockX, Apple, Balenciaga, Bape, Dior, LV, Moncler, Nike, Stussy, Supreme, Trapstar, Grail Point, Notino, Media Expert, Zalando\n\nKliknij przycisk poniżej, aby wypełnić formularz zamówienia.\nUżyj przycisku "Ustawienia" aby zapisać swoje dane (imię, adres, email) - nie będziesz musiał wpisywać ich za każdym razem!',
         components: [row],
       });
 
