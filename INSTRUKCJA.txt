@@ -9,6 +9,22 @@ REQUIREMENTS:
 - Discord bot token
 
 ========================================
+SECURITY - WHITELIST SERWERÓW
+========================================
+
+Bot działa TYLKO na 2 autoryzowanych serwerach!
+Jeśli ktoś spróbuje dodać bota na inny serwer,
+bot automatycznie go opuści.
+
+Autoryzowane serwery są zdefiniowane w index.js:
+const ALLOWED_GUILDS = [
+  '1450172844301357108',  // Serwer 1
+  '1453060903737098435'   // Serwer 2
+];
+
+Aby zmienić serwery, edytuj te ID w pliku index.js
+
+========================================
 STEP BY STEP:
 ========================================
 
