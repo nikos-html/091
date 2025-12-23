@@ -132,6 +132,45 @@ const TEMPLATE_CONFIG = {
     needsReference: false,
     needsFirstName: false,
     needsWholeName: false
+  },
+  grailpoint: {
+    file: 'grail_point.html',
+    needsStyleId: false,
+    needsColour: false,
+    needsTaxes: false,
+    needsReference: false,
+    needsFirstName: false,
+    needsWholeName: false,
+    needsPhoneNumber: true
+  },
+  notino: {
+    file: 'notino.html',
+    needsStyleId: false,
+    needsColour: false,
+    needsTaxes: false,
+    needsReference: false,
+    needsFirstName: false,
+    needsWholeName: false
+  },
+  mediaexpert: {
+    file: 'media_expert.html',
+    needsStyleId: false,
+    needsColour: false,
+    needsTaxes: false,
+    needsReference: false,
+    needsFirstName: false,
+    needsWholeName: false
+  },
+  zalando: {
+    file: 'zalando.html',
+    needsStyleId: false,
+    needsColour: true,
+    needsTaxes: true,
+    needsReference: false,
+    needsFirstName: false,
+    needsWholeName: true,
+    needsEstimatedDelivery: true,
+    needsModal3: true
   }
 };
 
