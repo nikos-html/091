@@ -1,0 +1,29 @@
+C:\DiscordFormulas\DiscordFormulas>node index.js
+[2025-10-24 15:39:34] DEBUG Creating transport: nodemailer (6.10.1; +https://nodemailer.com/; SMTP/6.10.1[client:6.10.1])
+✅ Zalogowano jako Mamba Receipts#1179
+🔄 Rejestrowanie slash commands na serwerze...
+(node:9036) DeprecationWarning: The ready event has been renamed to clientReady to distinguish it from the gateway READY event and will only emit under that name in v15. Please use clientReady instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+✅ Zarejestrowano 6 slash commands na serwerze (widoczne natychmiast)!
+[2025-10-24 15:39:35] DEBUG [2oi1QlXtcs] Resolved smtp.gmail.com as 142.251.9.108 [cache miss]
+[2025-10-24 15:39:35] INFO  [2oi1QlXtcs] Secure connection established to 142.251.9.108:465
+[2025-10-24 15:39:35] DEBUG [2oi1QlXtcs] S: 220 smtp.gmail.com ESMTP a640c23a62f3a-b6d51471c24sm556032966b.75 - gsmtp
+[2025-10-24 15:39:35] DEBUG [2oi1QlXtcs] C: EHLO [127.0.0.1]
+[2025-10-24 15:39:35] DEBUG [2oi1QlXtcs] S: 250-smtp.gmail.com at your service, [85.221.158.68]
+[2025-10-24 15:39:35] DEBUG [2oi1QlXtcs] S: 250-SIZE 35882577
+[2025-10-24 15:39:35] DEBUG [2oi1QlXtcs] S: 250-8BITMIME
+[2025-10-24 15:39:35] DEBUG [2oi1QlXtcs] S: 250-AUTH LOGIN PLAIN XOAUTH2 PLAIN-CLIENTTOKEN OAUTHBEARER XOAUTH
+[2025-10-24 15:39:35] DEBUG [2oi1QlXtcs] S: 250-ENHANCEDSTATUSCODES
+[2025-10-24 15:39:35] DEBUG [2oi1QlXtcs] S: 250-PIPELINING
+[2025-10-24 15:39:35] DEBUG [2oi1QlXtcs] S: 250-CHUNKING
+[2025-10-24 15:39:35] DEBUG [2oi1QlXtcs] S: 250 SMTPUTF8
+[2025-10-24 15:39:35] DEBUG [2oi1QlXtcs] SMTP handshake finished
+[2025-10-24 15:39:35] DEBUG [2oi1QlXtcs] C: AUTH PLAIN AGRveHlpaTAwQGdtYWlsLmNvbQAvKiBzZWNyZXQgKi8=
+[2025-10-24 15:39:35] DEBUG [2oi1QlXtcs] S: 235 2.7.0 Accepted
+[2025-10-24 15:39:35] INFO  [2oi1QlXtcs] User "doxyii00@gmail.com" authenticated
+[2025-10-24 15:39:35] DEBUG [2oi1QlXtcs] C: QUIT
+✅ SMTP OK
+✅ Formularz już istnieje na kanale #generator - pomijam wysyłanie
+[2025-10-24 15:39:35] DEBUG [2oi1QlXtcs] S: 221 2.0.0 closing connection a640c23a62f3a-b6d51471c24sm556032966b.75 - gsmtp
+[2025-10-24 15:39:35] DEBUG [2oi1QlXtcs] Closing connection to the server using "end"
+[2025-10-24 15:39:35] INFO  [2oi1QlXtcs] Connection closed
