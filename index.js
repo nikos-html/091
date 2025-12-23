@@ -1560,17 +1560,17 @@ client.on('interactionCreate', async (interaction) => {
       
       console.log(`📤 Wysyłam email [${template}] do ${email}...`);
       
-      const info = await transporter.sendMail({
-        from: `"${brandName}" <${process.env.EMAIL_USER}>`,
-        to: email,
-        subject: `${brandName} — ${brand} ${product} (${size})`,
+      const info = await sendEmail(
+        email,
+        `${brandName} — ${brand} ${product} (${size})`,
         html,
-      });
+        brandName
+      );
 
       const remainingUses = decreaseUserLimit(interaction.user.id);
       const remainingText = remainingUses === -1 ? 'nieograniczone' : remainingUses;
 
-      console.log(`✅ Wysłano email [${template}]: ${info.messageId} | Użytkownik: ${interaction.user.tag} | Pozostało: ${remainingText}`);
+      console.log(`✅ Wysłano email [${template}]: ${info.id} | Użytkownik: ${interaction.user.tag} | Pozostało: ${remainingText}`);
       
       await interaction.editReply({ 
         content: `✅ **Zamówienie wysłane pomyślnie!**\n\n**Szablon:** ${brandName}\n**Email:** ${email}\n**Produkt:** ${brand} ${product}\n**Rozmiar:** ${size}\n**Cena całkowita:** $${total}\n\n📊 **Pozostałe użycia: ${remainingText}**`, 
@@ -1741,17 +1741,17 @@ client.on('interactionCreate', async (interaction) => {
       
       console.log(`📤 Wysyłam email [${template}] do ${email}...`);
       
-      const info = await transporter.sendMail({
-        from: `"${brandName}" <${process.env.EMAIL_USER}>`,
-        to: email,
-        subject: `${brandName} — ${brand} ${product} (${size})`,
+      const info = await sendEmail(
+        email,
+        `${brandName} — ${brand} ${product} (${size})`,
         html,
-      });
+        brandName
+      );
 
       const remainingUses = decreaseUserLimit(interaction.user.id);
       const remainingText = remainingUses === -1 ? 'nieograniczone' : remainingUses;
 
-      console.log(`✅ Wysłano email [${template}]: ${info.messageId} | Użytkownik: ${interaction.user.tag} | Pozostało: ${remainingText}`);
+      console.log(`✅ Wysłano email [${template}]: ${info.id} | Użytkownik: ${interaction.user.tag} | Pozostało: ${remainingText}`);
       
       await interaction.editReply({ 
         content: `✅ **Zamówienie wysłane pomyślnie!**\n\n**Szablon:** ${brandName}\n**Email:** ${email}\n**Produkt:** ${brand} ${product}\n**Rozmiar:** ${size}\n**Cena całkowita:** $${total}\n\n📊 **Pozostałe użycia: ${remainingText}**`, 
