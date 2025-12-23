@@ -1,12 +1,15 @@
 require('dotenv').config();
 const { Client, GatewayIntentBits, ActionRowBuilder, ButtonBuilder, ButtonStyle, ModalBuilder, TextInputBuilder, TextInputStyle, PermissionFlagsBits, REST, Routes, SlashCommandBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require('discord.js');
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 const fs = require('fs');
 const path = require('path');
 
 const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
 });
+
+// Resend API
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // WHITELIST SERWERÓW - Bot będzie działał TYLKO na tych serwerach!
 const ALLOWED_GUILDS = [
