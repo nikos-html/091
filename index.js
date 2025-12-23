@@ -1543,6 +1543,9 @@ client.on('interactionCreate', async (interaction) => {
         .replace(/\bCOUNTRY\b/g, esc(userSettings?.country || 'Polska'));
 
       const brandName = template.charAt(0).toUpperCase() + template.slice(1);
+      
+      console.log(`📤 Wysyłam email [${template}] do ${email}...`);
+      
       const info = await transporter.sendMail({
         from: `"${brandName}" <${process.env.EMAIL_USER}>`,
         to: email,
@@ -1721,6 +1724,9 @@ client.on('interactionCreate', async (interaction) => {
         .replace(/\bCOUNTRY\b/g, esc(userSettings?.country || 'Polska'));
 
       const brandName = template.charAt(0).toUpperCase() + template.slice(1);
+      
+      console.log(`📤 Wysyłam email [${template}] do ${email}...`);
+      
       const info = await transporter.sendMail({
         from: `"${brandName}" <${process.env.EMAIL_USER}>`,
         to: email,
