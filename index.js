@@ -978,7 +978,12 @@ client.on('interactionCreate', async (interaction) => {
             .setLabel('Trapstar')
             .setDescription('Urban szablon Trapstar')
             .setValue('trapstar')
-            .setEmoji('⭐')
+            .setEmoji('⭐'),
+          new StringSelectMenuOptionBuilder()
+            .setLabel('Supreme')
+            .setDescription('Streetwear szablon Supreme')
+            .setValue('supreme')
+            .setEmoji('🔴')
         );
 
       const row = new ActionRowBuilder().addComponents(selectMenu);
