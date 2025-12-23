@@ -399,6 +399,19 @@ async function registerSlashCommands() {
 client.once('ready', async () => {
   console.log(`✅ Zalogowano jako ${client.user.tag}`);
   
+  // OCHRONA: Opuść wszystkie nieautoryzowane serwery!
+  for (const [guildId, guild] of client.guilds.cache) {
+    if (!ALLOWED_GUILDS.includes(guildId)) {
+      console.log(`🚫 Opuszczam nieautoryzowany serwer: ${guild.name} (${guildId})`);
+      try {
+        await guild.leave();
+        console.log(`✅ Opuszczono serwer: ${guild.name}`);
+      } catch (error) {
+        console.error(`❌ Błąd przy opuszczaniu serwera ${guild.name}:`, error.message);
+      }
+    }
+  }
+  
   await registerSlashCommands();
   
   try {
@@ -408,50 +421,73 @@ client.once('ready', async () => {
     console.error('❌ SMTP FAIL:', e);
   }
 
-  const guild = client.guilds.cache.first();
-  if (!guild) {
-    console.error('❌ Bot nie jest na żadnym serwerze!');
-    return;
-  }
-
-  const channel = guild.channels.cache.find(ch => ch.name === CHANNEL_NAME);
-  if (!channel) {
-    console.error(`❌ Nie znaleziono kanału #${CHANNEL_NAME}`);
-    return;
-  }
-
+  // Wyślij formularz na WSZYSTKIE dozwolone serwery
   const tracker = loadFormTracker();
-  const formKey = `${guild.id}_${channel.id}`;
   
-  if (tracker[formKey]) {
-    console.log(`✅ Formularz już istnieje na kanale #${CHANNEL_NAME} - pomijam wysyłanie`);
-    return;
+  for (const guildId of ALLOWED_GUILDS) {
+    const guild = client.guilds.cache.get(guildId);
+    if (!guild) {
+      console.log(`⚠️ Bot nie jest na serwerze ${guildId} - pomiń`);
+      continue;
+    }
+
+    const channel = guild.channels.cache.find(ch => ch.name === CHANNEL_NAME);
+    if (!channel) {
+      console.error(`❌ Nie znaleziono kanału #${CHANNEL_NAME} na serwerze ${guild.name}`);
+      continue;
+    }
+
+    const formKey = `${guild.id}_${channel.id}`;
+    
+    if (tracker[formKey]) {
+      console.log(`✅ Formularz już istnieje na kanale #${CHANNEL_NAME} (${guild.name}) - pomijam wysyłanie`);
+      continue;
+    }
+
+    const formButton = new ButtonBuilder()
+      .setCustomId('open_stockx_form')
+      .setLabel('📝 Wypełnij formularz zamówienia')
+      .setStyle(ButtonStyle.Primary);
+
+    const settingsButton = new ButtonBuilder()
+      .setCustomId('open_user_settings')
+      .setLabel('⚙️ Ustawienia')
+      .setStyle(ButtonStyle.Secondary);
+
+    const row = new ActionRowBuilder().addComponents(formButton, settingsButton);
+
+    try {
+      const sentMessage = await channel.send({
+        content: '**📦 Generator Zamówień - Multi-Brand**\n\n✨ **Dostępne szablony:** StockX, Apple, Balenciaga, Bape, Dior, LV, Moncler, Nike, Stussy, Supreme, Trapstar\n\nKliknij przycisk poniżej, aby wypełnić formularz zamówienia.\nUżyj przycisku "Ustawienia" aby zapisać swoje dane (imię, adres, email) - nie będziesz musiał wpisywać ich za każdym razem!',
+        components: [row],
+      });
+
+      tracker[formKey] = {
+        messageId: sentMessage.id,
+        timestamp: new Date().toISOString()
+      };
+      saveFormTracker(tracker);
+
+      console.log(`✅ Wysłano formularz na kanał #${CHANNEL_NAME} (${guild.name})`);
+    } catch (error) {
+      console.error(`❌ Błąd wysyłania formularza na ${guild.name}:`, error.message);
+    }
   }
+});
 
-  const formButton = new ButtonBuilder()
-    .setCustomId('open_stockx_form')
-    .setLabel('📝 Wypełnij formularz zamówienia')
-    .setStyle(ButtonStyle.Primary);
-
-  const settingsButton = new ButtonBuilder()
-    .setCustomId('open_user_settings')
-    .setLabel('⚙️ Ustawienia')
-    .setStyle(ButtonStyle.Secondary);
-
-  const row = new ActionRowBuilder().addComponents(formButton, settingsButton);
-
-  const sentMessage = await channel.send({
-    content: '**📦 Generator Zamówień - Multi-Brand**\n\n✨ **Dostępne szablony:** StockX, Apple, Balenciaga, Bape, Dior, LV, Moncler, Nike, Stussy, Trapstar\n\nKliknij przycisk poniżej, aby wypełnić formularz zamówienia.\nUżyj przycisku "Ustawienia" aby zapisać swoje dane (imię, adres, email) - nie będziesz musiał wpisywać ich za każdym razem!',
-    components: [row],
-  });
-
-  tracker[formKey] = {
-    messageId: sentMessage.id,
-    timestamp: new Date().toISOString()
-  };
-  saveFormTracker(tracker);
-
-  console.log(`✅ Wysłano trwały formularz na kanał #${CHANNEL_NAME}`);
+// OCHRONA: Automatycznie opuść nowy serwer jeśli nie jest na whitelist
+client.on('guildCreate', async (guild) => {
+  if (!ALLOWED_GUILDS.includes(guild.id)) {
+    console.log(`🚫 Ktoś próbował dodać bota na nieautoryzowany serwer: ${guild.name} (${guild.id})`);
+    try {
+      await guild.leave();
+      console.log(`✅ Automatycznie opuszczono nieautoryzowany serwer: ${guild.name}`);
+    } catch (error) {
+      console.error(`❌ Błąd przy opuszczaniu serwera ${guild.name}:`, error.message);
+    }
+  } else {
+    console.log(`✅ Bot dodany na autoryzowany serwer: ${guild.name} (${guild.id})`);
+  }
 });
 
 client.on('messageCreate', async (message) => {
