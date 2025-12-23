@@ -177,15 +177,28 @@ const TEMPLATE_CONFIG = {
   }
 };
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: { 
-    user: process.env.EMAIL_USER, 
-    pass: process.env.EMAIL_PASS 
-  },
-  logger: true,
-  debug: true,
-});
+// Funkcja wysyłania emaila przez Resend
+const sendEmail = async (to, subject, html, fromName) => {
+  try {
+    const { data, error } = await resend.emails.send({
+      from: `${fromName} <onboarding@resend.dev>`,
+      to: [to],
+      subject: subject,
+      html: html,
+    });
+    
+    if (error) {
+      console.error('❌ Resend Error:', error);
+      throw new Error(error.message);
+    }
+    
+    console.log(`✅ Email wysłany przez Resend: ${data.id}`);
+    return data;
+  } catch (err) {
+    console.error('❌ Błąd wysyłania email:', err);
+    throw err;
+  }
+};
 
 const readTpl = (name) => fs.readFileSync(path.join(__dirname, name), 'utf8');
 const esc = (s) => String(s)
