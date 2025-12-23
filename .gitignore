@@ -7,3 +7,7 @@ user_emails.json
 user_settings.json
 *.log
 .DS_Store
+-e 
+# Environment files
+*.env
+*.env.*
