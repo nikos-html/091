@@ -470,12 +470,12 @@ client.once('ready', async () => {
   
   await registerSlashCommands();
   
-  // Weryfikacja SMTP w tle (nie blokuje)
-  transporter.verify().then(() => {
-    console.log('✅ SMTP OK');
-  }).catch((e) => {
-    console.error('❌ SMTP FAIL:', e.message);
-  });
+  // Weryfikacja Resend API
+  if (process.env.RESEND_API_KEY) {
+    console.log('✅ Resend API Key skonfigurowany');
+  } else {
+    console.error('❌ Brak RESEND_API_KEY w .env!');
+  }
 
   // Wyślij formularz na WSZYSTKIE dozwolone serwery
   console.log('📝 Sprawdzam serwery do wysłania formularza...');
