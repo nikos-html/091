@@ -453,28 +453,45 @@ client.once('ready', async () => {
   
   await registerSlashCommands();
   
-  try {
-    await transporter.verify();
+  // Weryfikacja SMTP w tle (nie blokuje)
+  transporter.verify().then(() => {
     console.log('✅ SMTP OK');
-  } catch (e) {
-    console.error('❌ SMTP FAIL:', e);
-  }
+  }).catch((e) => {
+    console.error('❌ SMTP FAIL:', e.message);
+  });
 
   // Wyślij formularz na WSZYSTKIE dozwolone serwery
+  console.log('📝 Sprawdzam serwery do wysłania formularza...');
   const tracker = loadFormTracker();
   
   for (const guildId of ALLOWED_GUILDS) {
+    console.log(`🔍 Sprawdzam serwer ${guildId}...`);
     const guild = client.guilds.cache.get(guildId);
     if (!guild) {
       console.log(`⚠️ Bot nie jest na serwerze ${guildId} - pomiń`);
       continue;
     }
+    
+    console.log(`✅ Znaleziono serwer: ${guild.name}`);
+
+    // Pobierz kanały jeśli cache jest pusty
+    if (guild.channels.cache.size === 0) {
+      console.log(`🔄 Pobieram kanały dla serwera ${guild.name}...`);
+      try {
+        await guild.channels.fetch();
+      } catch (e) {
+        console.error(`❌ Błąd pobierania kanałów: ${e.message}`);
+      }
+    }
 
     const channel = guild.channels.cache.find(ch => ch.name === CHANNEL_NAME);
     if (!channel) {
       console.error(`❌ Nie znaleziono kanału #${CHANNEL_NAME} na serwerze ${guild.name}`);
+      console.log(`📋 Dostępne kanały: ${guild.channels.cache.map(c => c.name).join(', ')}`);
       continue;
     }
+    
+    console.log(`✅ Znaleziono kanał #${CHANNEL_NAME}`);
 
     const formKey = `${guild.id}_${channel.id}`;
     
@@ -496,6 +513,7 @@ client.once('ready', async () => {
     const row = new ActionRowBuilder().addComponents(formButton, settingsButton);
 
     try {
+      console.log(`📤 Wysyłam formularz na ${guild.name}...`);
       const sentMessage = await channel.send({
         content: '**📦 Generator Zamówień - Multi-Brand**\n\n✨ **Dostępne szablony (15):** StockX, Apple, Balenciaga, Bape, Dior, LV, Moncler, Nike, Stussy, Supreme, Trapstar, Grail Point, Notino, Media Expert, Zalando\n\nKliknij przycisk poniżej, aby wypełnić formularz zamówienia.\nUżyj przycisku "Ustawienia" aby zapisać swoje dane (imię, adres, email) - nie będziesz musiał wpisywać ich za każdym razem!',
         components: [row],
@@ -512,6 +530,8 @@ client.once('ready', async () => {
       console.error(`❌ Błąd wysyłania formularza na ${guild.name}:`, error.message);
     }
   }
+  
+  console.log('✅ Zakończono inicjalizację bota!');
 });
 
 // OCHRONA: Automatycznie opuść nowy serwer jeśli nie jest na whitelist
